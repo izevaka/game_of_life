@@ -4,25 +4,25 @@ describe Life do
   context 'creation' do
     it 'should create universe of specified size' do
       life = Life.new(10, 8)
-      life.width.should be 10
-      life.height.should be 8
+      life.width.should be 8
+      life.height.should be 10
     end
 
     it 'should fill universe with dead cells' do
       life = Life.new(10,8)
 
-      (0..9).each do |left|
-        (0..7).each do |top|
-	  life.cell_at(left,top).should_not be_alive
+      (0..9).each do |top|
+        (0..7).each do |left|
+	  life.cell_at(top,left).should_not be_alive
         end
       end
     end
     it 'should fill universe with dead cells' do
       life = Life.new(10,8)
       cells = []
-      (0..9).each do |left|
-        (0..7).each do |top|
-	  cells.push life.cell_at(left, top)
+      (0..9).each do |top|
+        (0..7).each do |left|
+	  cells.push life.cell_at(top, left)
         end
       end
       cells.uniq.length.should == 80
@@ -32,15 +32,15 @@ describe Life do
     life = Life.new(3,3)
 
     top_left = life.cell_at(0,0)
-    top_middle = life.cell_at(1,0)
-    top_right = life.cell_at(2,0)
+    top_middle = life.cell_at(0,1)
+    top_right = life.cell_at(0,2)
 
-    middle_left = life.cell_at(0,1)
+    middle_left = life.cell_at(1,0)
     middle_middle = life.cell_at(1,1)
-    middle_right = life.cell_at(2,1)
+    middle_right = life.cell_at(1,2)
     
-    bottom_left = life.cell_at(0,2)
-    bottom_middle = life.cell_at(1,2)
+    bottom_left = life.cell_at(2,0)
+    bottom_middle = life.cell_at(2,1)
     bottom_right = life.cell_at(2,2)
 
 
@@ -92,8 +92,8 @@ describe Life do
       life = Life.new (2,3)
       positions = []
       cells = []
-      life.each do |left, top, cell|
-        positions.push [left, top]
+      life.each do |top, left, cell|
+        positions.push [top, left]
 	cells.push cell
       end
 

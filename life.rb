@@ -16,32 +16,32 @@ end
 class Life
   attr_reader :width, :height
 
-  def initialize(width, height)
+  def initialize(height, width)
     @width = width
     @height = height
-    @cells = Array.new(width) {Array.new(height) {Cell.new}}
+    @cells = Array.new(height) {Array.new(width) {Cell.new}}
     
-    each {|l, t, cell| cell.location = "#{l}x#{t}"}
+    each {|t, l, cell| cell.location = "#{t}x#{l}"}
     fill_neighbours
   end
-  def cell_at(left, top)
-    @cells[left][top]
+  def cell_at(top, left)
+    @cells[top][left]
   end
   def each
     for left in (0..width - 1)
       for top in (0..height - 1)
-        yield(left, top, @cells[left][top])
+        yield(top, left, @cells[top][left])
       end
     end
   end
 
 private
   def fill_neighbours
-    each do |left, top, cell| 
-      fill_neighbours_for_cell(left,top,cell) 
+    each do |top, left, cell| 
+      fill_neighbours_for_cell(top, left,cell) 
     end
   end
-  def fill_neighbours_for_cell(cell_left, cell_top, cell)
+  def fill_neighbours_for_cell(cell_top, cell_left, cell)
     neighbours = Array.new
     (-1..1).each do |l|
       (-1..1).each do |t|
@@ -59,7 +59,7 @@ private
        
         #exclude ourselves
 	if (left == cell_left and top == cell_top) then next end
-        neighbours.push @cells[left][top]
+        neighbours.push @cells[top][left]
       end
     end
     cell.neighbours= neighbours.uniq
