@@ -17,7 +17,17 @@ describe Life do
         end
       end
     end
-  end
+    it 'should fill universe with dead cells' do
+      life = Life.new(10,8)
+      cells = []
+      (0..9).each do |left|
+        (0..7).each do |top|
+	  cells.push life.cell_at(left, top)
+        end
+      end
+      cells.uniq.length.should == 80
+    end
+ end
   context 'Filling neighbours' do
     life = Life.new(3,3)
 
@@ -59,6 +69,22 @@ describe Life do
     end
     it 'should fill neighbours for middle left' do
       middle_left.neighbours.should =~ [top_left, top_middle, middle_middle, bottom_middle, bottom_left]
+    end
+    it 'should fill neighbours for middle middle' do
+      middle_middle.neighbours.should =~ [top_left, top_middle, top_right, middle_left, middle_right,  bottom_left, bottom_middle, bottom_right ]
+    end
+    it 'should fill neighbours for middle right' do
+      middle_right.neighbours.should =~ [top_middle, top_right, bottom_right, bottom_middle, middle_middle ]
+    end
+  
+    it 'should fill neighbours for bottom left' do
+      bottom_left.neighbours.should =~ [bottom_middle, middle_middle, middle_left]
+    end
+    it 'should fill neighbours for bottom middle' do
+      bottom_middle.neighbours.should =~ [bottom_left, bottom_right, middle_left, middle_middle, middle_right]
+    end
+    it 'should fill neighbours for bottom right' do
+      bottom_right.neighbours.should =~ [bottom_middle, middle_middle, middle_right]
     end
   end
   context 'Iteration' do

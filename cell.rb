@@ -1,6 +1,6 @@
 class Cell
   
-  attr_accessor :neighbours
+  attr_accessor :neighbours, :location
   
   def initialize(alive = false, alive_next = false)
     @alive = alive
@@ -26,5 +26,8 @@ class Cell
   def update_state
     @alive = @alive_next
     @alive_next = false 
+  end
+  def inspect
+    @location
   end
 end
