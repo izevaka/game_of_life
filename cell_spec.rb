@@ -72,6 +72,10 @@ describe Cell do
      dead_cell.calc_next_state
      dead_cell.alive_next?.should be true
     end
+    it 'should set alive' do
+      dead_cell.alive= true
+      dead_cell.should be_alive
+    end
   end
   context 'Update state' do
     it 'should set alive to false when alive and is dead in the next state' do

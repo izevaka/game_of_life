@@ -11,6 +11,10 @@ class Cell
     @alive
   end
 
+  def alive=(alive)
+    @alive = alive
+  end
+
   def calc_next_state
     alive_count = @neighbours.count{|x| x.alive?}
     if alive? then

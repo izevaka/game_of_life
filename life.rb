@@ -34,6 +34,16 @@ class Life
       end
     end
   end
+  def update_state
+
+    each do |t,l,cell|
+      cell.calc_next_state
+    end
+
+    each do |t,l,cell|
+      cell.update_state
+    end
+  end
 
 private
   def fill_neighbours

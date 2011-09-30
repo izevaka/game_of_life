@@ -101,6 +101,25 @@ describe Life do
       cells.count {|x| x.is_a? Cell}.should == 6
     end
   end
+  context 'Game' do
+    it 'should calculate next state when update_state' do
+      life = Life.new(3,3)
+
+      life.cell_at(1,1).alive= true
+      life.cell_at(1,0).alive= true
+      life.cell_at(1,2).alive= true
+
+
+      life.update_state
+
+      life.cell_at(1,1).should be_alive
+      life.cell_at(1,0).should_not be_alive
+      life.cell_at(1,2).should_not be_alive
+      
+      life.cell_at(0,1).should be_alive
+      life.cell_at(2,1).should be_alive
+    end
+  end
 end
 
 describe Helper do
